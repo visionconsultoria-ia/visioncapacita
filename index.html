@@ -148,27 +148,36 @@ header{
 .hero-meta i{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
 
 /* costura: as duas frentes se encontram no losango */
-.seam-wrap{position:relative;background:var(--ink-2);z-index:3}
-.seam{display:grid;grid-template-columns:1fr;border-top:1px solid var(--line-dark)}
+.seam-wrap{position:relative;background:var(--ink-2);z-index:3;border-top:1px solid var(--line-dark);padding:18px 0 22px}
+.seam{position:relative;display:grid;grid-template-columns:1fr;gap:0}
 .seam-node{
   position:absolute;left:50%;top:0;transform:translate(-50%,-50%) rotate(45deg);
-  width:30px;height:30px;background:var(--ink);border:2px solid var(--gold);z-index:4;
+  width:26px;height:26px;background:var(--ink);border:2px solid var(--gold);z-index:4;
 }
 .seam-half{
-  padding:32px 22px;text-decoration:none;color:#fff;
+  padding:26px 16px;text-decoration:none;color:#fff;border-radius:12px;
   display:flex;flex-direction:column;align-items:center;
   transition:background .25s ease;
 }
-.seam-half:hover{background:rgba(255,255,255,.04)}
+.seam-half:hover{background:rgba(255,255,255,.05)}
 .seam-half + .seam-half{border-top:1px solid var(--line-dark)}
-.seam-half .eyebrow{color:rgba(255,255,255,.5)}
-.seam-half h3{margin:10px 0 8px;font-size:1.24rem;font-weight:600}
-.seam-half p{font-size:.94rem;color:rgba(255,255,255,.64);max-width:32ch}
+.seam-half .eyebrow{font-size:.62rem;color:rgba(255,255,255,.45)}
+.seam-half h3{margin:8px 0 6px;font-size:1.08rem;font-weight:600}
+.seam-half p{font-size:.88rem;line-height:1.5;color:rgba(255,255,255,.6);max-width:30ch}
 .seam-half.left h3{color:var(--build-lt)}
 .seam-half.right h3{color:var(--money-lt)}
+.seam-who{display:flex;align-items:center;gap:10px;margin-top:16px}
+.seam-who img{
+  width:38px;height:38px;border-radius:50%;object-fit:cover;
+  border:1px solid rgba(255,255,255,.25);
+}
+.seam-who span{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;
+  color:rgba(255,255,255,.7);text-align:left;
+}
 .seam-arrow{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;margin-top:16px;
-  color:rgba(255,255,255,.55);border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:3px;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;margin-top:14px;
+  color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.22);padding-bottom:3px;
 }
 
 /* ============================================================
@@ -375,11 +384,15 @@ footer a:hover{color:#fff}
   .nav-links a{font-size:.93rem;font-weight:500;color:rgba(255,255,255,.76);text-decoration:none;transition:color .2s}
   .nav-links a:hover{color:#fff}
 
-  .seam{grid-template-columns:1fr 1fr}
-  .seam-half{padding:40px 32px}
-  .seam-half + .seam-half{border-top:none;border-left:1px solid var(--line-dark)}
-  .seam-half h3{font-size:1.4rem}
-
+  .seam{grid-template-columns:1fr 1fr;gap:24px}
+  .seam-half{padding:30px 26px}
+  .seam-half + .seam-half{border-top:none}
+  .seam-half h3{font-size:1.16rem}
+  .seam::before{
+    content:'';position:absolute;left:50%;top:26px;bottom:26px;width:1px;
+    background:var(--line-dark);
+  }
+  
   .svc-grid{grid-template-columns:repeat(3,1fr);gap:18px}
   .people{grid-template-columns:1fr 1fr;gap:22px}
   .person{padding:36px 26px}
@@ -452,19 +465,29 @@ footer a:hover{color:#fff}
   <!-- assinatura: as duas frentes se encontram no losango da marca -->
   <div class="seam-wrap">
     <span class="seam-node"></span>
-    <div class="seam">
-      <a class="seam-half left" href="#desenvolvimento">
-        <p class="eyebrow">Frente 01</p>
-        <h3>Desenvolvimento &amp; Automação</h3>
-        <p>Aplicativos web, integrações e rotinas que rodam sozinhas. Com Jonatan Pelisoli.</p>
-        <span class="seam-arrow">tirar o manual da rotina →</span>
-      </a>
-      <a class="seam-half right" href="#financas">
-        <p class="eyebrow">Frente 02</p>
-        <h3>Consultoria Financeira</h3>
-        <p>Fluxo de caixa, precificação, dívidas e patrimônio. Com Gabriela Vieira.</p>
-        <span class="seam-arrow">enxergar o próprio dinheiro →</span>
-      </a>
+    <div class="shell">
+      <div class="seam">
+        <a class="seam-half left" href="#desenvolvimento">
+          <p class="eyebrow">Frente 01</p>
+          <h3>Desenvolvimento &amp; Automação</h3>
+          <p>Aplicativos web, integrações e rotinas que rodam sozinhas.</p>
+          <div class="seam-who">
+            <img src="jonatan.jpg" alt="Jonatan Pelisoli">
+            <span>Jonatan Pelisoli<br>desenvolvedor</span>
+          </div>
+          <span class="seam-arrow">tirar o manual da rotina →</span>
+        </a>
+        <a class="seam-half right" href="#financas">
+          <p class="eyebrow">Frente 02</p>
+          <h3>Consultoria Financeira</h3>
+          <p>Fluxo de caixa, precificação, dívidas e patrimônio.</p>
+          <div class="seam-who">
+            <img src="gabriela.jpg" alt="Gabriela Vieira">
+            <span>Gabriela Vieira<br>economista</span>
+          </div>
+          <span class="seam-arrow">enxergar o próprio dinheiro →</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
