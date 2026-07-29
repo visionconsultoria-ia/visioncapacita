@@ -13,7 +13,8 @@
 
 <style>
 /* ============================================================
-   TOKENS
+   VISION — CSS MOBILE FIRST
+   base = telas pequenas · min-width amplia
    ============================================================ */
 :root{
   --ink:#0A1020;
@@ -22,11 +23,11 @@
   --paper:#F4F6F9;
   --white:#FFFFFF;
 
-  --build:#009196;          /* frente Desenvolvimento */
+  --build:#009196;       /* frente Desenvolvimento */
   --build-lt:#25C2BE;
   --build-dk:#00666E;
 
-  --money:#5C4BDF;          /* frente Financeira */
+  --money:#5C4BDF;       /* frente Financeira */
   --money-lt:#8B7BFF;
   --money-dk:#3F32A8;
 
@@ -41,7 +42,7 @@
   --body:'Inter Tight',system-ui,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 
-  --shell:1180px;
+  --shell:1120px;
   --r:14px;
 }
 
@@ -54,271 +55,277 @@ body{
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
+  text-align:center;               /* centralização global */
 }
 img{display:block;max-width:100%}
 a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-.shell{width:100%;max-width:var(--shell);margin:0 auto;padding:0 24px}
+.shell{width:100%;max-width:var(--shell);margin:0 auto;padding:0 20px}
+.center{margin-left:auto;margin-right:auto}
 
-/* tipografia */
-h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:-.02em}
-h1{font-size:clamp(2.3rem,5.4vw,4.1rem);font-weight:700;letter-spacing:-.035em}
-h2{font-size:clamp(1.85rem,3.4vw,2.85rem);letter-spacing:-.03em}
-h3{font-size:1.3rem}
-p{font-size:1.05rem}
+/* ---------- tipografia (escala mobile primeiro) ---------- */
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.12;letter-spacing:-.02em}
+h1{font-size:2.05rem;font-weight:700;letter-spacing:-.032em}
+h2{font-size:1.6rem;letter-spacing:-.028em}
+h3{font-size:1.1rem}
+p{font-size:1rem}
 
 .eyebrow{
-  font-family:var(--mono);
-  font-size:.72rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--muted);
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);line-height:1.7;
 }
-.lede{font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--text-soft);max-width:62ch}
+.lede{font-size:1rem;color:var(--text-soft);max-width:60ch;margin:0 auto}
 
-/* botões */
+/* ---------- botões ---------- */
 .btn{
-  display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--body);font-weight:600;font-size:.98rem;
-  padding:14px 24px;border-radius:999px;border:1px solid transparent;
-  text-decoration:none;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:var(--body);font-weight:600;font-size:.95rem;
+  padding:13px 22px;border-radius:999px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;text-align:center;
   transition:transform .18s ease,background .18s ease,border-color .18s ease,color .18s ease;
 }
 .btn:hover{transform:translateY(-2px)}
-.btn-solid{background:var(--ink);color:#fff}
-.btn-solid:hover{background:var(--ink-3)}
+.btn svg{width:16px;height:16px;flex-shrink:0}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#e0940f}
 .btn-build{background:var(--build);color:#fff}
 .btn-build:hover{background:var(--build-dk)}
 .btn-money{background:var(--money);color:#fff}
 .btn-money:hover{background:var(--money-dk)}
+.btn-light{background:#fff;color:var(--ink)}
 .btn-ghost-light{border-color:rgba(255,255,255,.28);color:#fff}
 .btn-ghost-light:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 .btn-ghost{border-color:var(--line);color:var(--text);background:#fff}
 .btn-ghost:hover{border-color:var(--ink)}
-.btn svg{width:17px;height:17px;flex-shrink:0}
+.actions{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:28px}
 
-:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
-
-/* losango — assinatura vinda da marca */
-.rhombus{width:14px;height:14px;transform:rotate(45deg);flex-shrink:0}
+/* ---------- losango: assinatura da marca ---------- */
+.rhombus{width:11px;height:11px;transform:rotate(45deg);flex-shrink:0}
 .rh-build{background:var(--build)}
 .rh-money{background:var(--money)}
+.rh-gold{background:var(--gold)}
 
 /* ============================================================
    HEADER
    ============================================================ */
 header{
   position:sticky;top:0;z-index:100;
-  background:rgba(10,16,32,.88);
+  background:rgba(10,16,32,.92);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line-dark);
 }
-.nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:24px}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
-.brand img{height:32px;width:32px}
-.brand-name{font-family:var(--display);font-weight:700;font-size:1.12rem;color:#fff;letter-spacing:-.02em}
-.brand-name small{
-  display:block;font-family:var(--mono);font-weight:400;font-size:.6rem;
-  letter-spacing:.18em;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:1px;
-}
-.nav-links{display:flex;align-items:center;gap:28px}
-.nav-links a{
-  font-size:.95rem;font-weight:500;color:rgba(255,255,255,.76);text-decoration:none;
-  transition:color .2s;
-}
-.nav-links a:hover{color:#fff}
-.nav .btn{padding:11px 20px;font-size:.9rem}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.brand img{height:26px;width:26px}
+.brand-name{font-family:var(--display);font-weight:700;font-size:1rem;color:#fff;letter-spacing:-.02em;text-align:left}
+.brand-name small{display:none}
+.nav-links{display:none}
+.nav .btn{padding:10px 16px;font-size:.85rem}
+.nav-cta-long{display:none}
 
 /* ============================================================
    HERO
    ============================================================ */
-.hero{background:var(--ink);color:#fff;padding:96px 0 0;position:relative;overflow:hidden}
+.hero{background:var(--ink);color:#fff;padding:56px 0 0;position:relative;overflow:hidden}
 .hero::after{
   content:'';position:absolute;inset:0;pointer-events:none;
   background:
-    radial-gradient(620px 420px at 12% 8%, rgba(0,145,150,.20), transparent 68%),
-    radial-gradient(620px 420px at 88% 4%, rgba(92,75,223,.22), transparent 68%);
+    radial-gradient(480px 300px at 20% 6%, rgba(0,145,150,.20), transparent 70%),
+    radial-gradient(480px 300px at 80% 2%, rgba(92,75,223,.22), transparent 70%);
 }
 .hero .shell{position:relative;z-index:2}
-.hero h1{color:#fff;max-width:19ch}
+.hero h1{color:#fff;max-width:22ch;margin:14px auto 0}
 .hero h1 em{font-style:normal;color:var(--build-lt)}
 .hero h1 b{font-weight:700;color:var(--money-lt)}
-.hero-lede{color:rgba(255,255,255,.72);max-width:56ch;margin-top:26px;font-size:1.13rem}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hero-lede{color:rgba(255,255,255,.74);max-width:52ch;margin:20px auto 0;font-size:1.03rem}
 .hero-meta{
-  display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:44px;padding-bottom:80px;
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;color:rgba(255,255,255,.5);
+  display:flex;flex-direction:column;align-items:center;gap:9px;
+  margin:34px auto 0;padding-bottom:52px;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:rgba(255,255,255,.5);
 }
-.hero-meta span{display:flex;align-items:center;gap:9px}
-.hero-meta i{width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
+.hero-meta span{display:flex;align-items:center;gap:8px}
+.hero-meta i{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
 
 /* costura: as duas frentes se encontram no losango */
-.seam{position:relative;z-index:3;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-dark)}
+.seam-wrap{position:relative;background:var(--ink-2);z-index:3}
+.seam{display:grid;grid-template-columns:1fr;border-top:1px solid var(--line-dark)}
+.seam-node{
+  position:absolute;left:50%;top:0;transform:translate(-50%,-50%) rotate(45deg);
+  width:30px;height:30px;background:var(--ink);border:2px solid var(--gold);z-index:4;
+}
 .seam-half{
-  padding:36px 30px 40px;text-decoration:none;color:#fff;position:relative;
+  padding:32px 22px;text-decoration:none;color:#fff;
+  display:flex;flex-direction:column;align-items:center;
   transition:background .25s ease;
 }
 .seam-half:hover{background:rgba(255,255,255,.04)}
-.seam-half.left{text-align:right;border-right:1px solid var(--line-dark)}
-.seam-half .eyebrow{color:rgba(255,255,255,.55)}
-.seam-half h3{margin:12px 0 8px;font-size:1.42rem;font-weight:600}
-.seam-half p{font-size:.96rem;color:rgba(255,255,255,.62);max-width:34ch}
-.seam-half.left p{margin-left:auto}
+.seam-half + .seam-half{border-top:1px solid var(--line-dark)}
+.seam-half .eyebrow{color:rgba(255,255,255,.5)}
+.seam-half h3{margin:10px 0 8px;font-size:1.24rem;font-weight:600}
+.seam-half p{font-size:.94rem;color:rgba(255,255,255,.64);max-width:32ch}
 .seam-half.left h3{color:var(--build-lt)}
 .seam-half.right h3{color:var(--money-lt)}
 .seam-arrow{
-  font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;margin-top:18px;display:inline-block;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;margin-top:16px;
   color:rgba(255,255,255,.55);border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:3px;
 }
-.seam-node{
-  position:absolute;left:50%;top:0;transform:translate(-50%,-50%) rotate(45deg);
-  width:34px;height:34px;background:var(--ink);
-  border:2px solid var(--gold);z-index:4;
-}
-.seam-wrap{position:relative;background:var(--ink-2)}
 
 /* ============================================================
-   SEÇÕES CLARAS
+   BANDAS
    ============================================================ */
-.band{padding:96px 0}
+.band{padding:60px 0}
 .band-paper{background:var(--paper)}
 .band-white{background:var(--white)}
-.band-head{max-width:70ch;margin-bottom:56px}
-.band-head h2{margin:14px 0 16px}
+.band-head{max-width:64ch;margin:0 auto 34px}
+.band-head h2{margin:12px auto 12px}
 
-/* ---------- perfis ---------- */
-.people{display:grid;grid-template-columns:1fr 1fr;gap:28px}
-.person{
-  background:var(--white);border:1px solid var(--line);border-radius:var(--r);
-  padding:26px;display:flex;flex-direction:column;
-}
-.person.build{border-top:3px solid var(--build)}
-.person.money{border-top:3px solid var(--money)}
-.person-top{display:flex;gap:20px;align-items:flex-start}
-.portrait{position:relative;flex-shrink:0}
-.portrait img{width:112px;height:112px;object-fit:cover;border-radius:10px}
-.portrait .mark{
-  position:absolute;bottom:-9px;right:-9px;width:24px;height:24px;transform:rotate(45deg);
-  border:3px solid var(--white);
-}
-.person.build .mark{background:var(--build)}
-.person.money .mark{background:var(--money)}
-.person-name{font-family:var(--display);font-size:1.34rem;font-weight:700;letter-spacing:-.02em}
-.person-role{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
-.person.build .person-role{color:var(--build-dk)}
-.person.money .person-role{color:var(--money-dk)}
-.person-bio{margin-top:20px;color:var(--text-soft);font-size:1rem}
-.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
-.tag{
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;
-  padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--text-soft);
-  background:#fbfcfd;
-}
-.person-foot{margin-top:auto;padding-top:24px}
-
-/* ---------- serviços ---------- */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+/* ---------- cards de serviço ---------- */
+.svc-grid{display:grid;grid-template-columns:1fr;gap:14px}
 .svc{
   background:var(--white);border:1px solid var(--line);border-radius:var(--r);
-  padding:28px 24px;transition:border-color .2s ease,transform .2s ease;
+  padding:26px 22px;display:flex;flex-direction:column;align-items:center;
+  transition:border-color .2s ease,transform .2s ease;
 }
 .svc:hover{transform:translateY(-3px)}
 .svc-build:hover{border-color:var(--build)}
 .svc-money:hover{border-color:var(--money)}
-.svc-head{display:flex;align-items:center;gap:11px;margin-bottom:14px}
-.svc h3{font-size:1.14rem}
-.svc p{font-size:.97rem;color:var(--text-soft)}
-.svc ul{list-style:none;margin-top:16px;display:flex;flex-wrap:wrap;gap:6px}
+.svc .rhombus{margin-bottom:13px}
+.svc h3{margin-bottom:10px}
+.svc p{font-size:.96rem;color:var(--text-soft);max-width:40ch}
+.svc ul{list-style:none;margin-top:15px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 .svc li{
-  font-family:var(--mono);font-size:.67rem;color:var(--muted);
+  font-family:var(--mono);font-size:.65rem;color:var(--muted);
   border:1px solid var(--line);border-radius:5px;padding:3px 7px;
 }
 
 /* ---------- fluxo de automação ---------- */
 .flow{
-  margin-top:44px;background:var(--ink);border-radius:var(--r);padding:34px 28px;color:#fff;
-  overflow:hidden;
+  margin-top:30px;background:var(--ink);border-radius:var(--r);
+  padding:28px 20px;color:#fff;overflow:hidden;
 }
-.flow-title{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.flow-track{display:flex;align-items:center;gap:0;margin-top:22px;flex-wrap:wrap}
+.flow-title{font-family:var(--mono);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.flow-track{display:flex;flex-direction:column;align-items:stretch;margin:20px auto 0;max-width:280px}
 .flow-step{
-  font-family:var(--mono);font-size:.82rem;padding:10px 15px;border:1px solid rgba(255,255,255,.2);
-  border-radius:7px;background:rgba(255,255,255,.04);white-space:nowrap;
+  font-family:var(--mono);font-size:.78rem;padding:10px 14px;
+  border:1px solid rgba(255,255,255,.2);border-radius:7px;background:rgba(255,255,255,.04);
 }
-.flow-link{flex:1;min-width:26px;height:1px;position:relative;background:rgba(255,255,255,.18);margin:0 10px}
+.flow-link{position:relative;width:1px;height:20px;margin:0 auto;background:rgba(255,255,255,.18)}
 .flow-link::after{
-  content:'';position:absolute;top:-2px;left:0;width:5px;height:5px;background:var(--build-lt);
-  transform:rotate(45deg);animation:travel 3.4s linear infinite;
+  content:'';position:absolute;left:-2px;top:0;width:5px;height:5px;
+  background:var(--build-lt);transform:rotate(45deg);animation:travel-v 3.4s linear infinite;
 }
-.flow-note{margin-top:20px;font-size:.95rem;color:rgba(255,255,255,.6);max-width:60ch}
-@keyframes travel{from{left:0;opacity:0}12%{opacity:1}88%{opacity:1}to{left:100%;opacity:0}}
+@keyframes travel-v{from{top:0;opacity:0}12%{opacity:1}88%{opacity:1}to{top:100%;opacity:0}}
+@keyframes travel-h{from{left:0;opacity:0}12%{opacity:1}88%{opacity:1}to{left:100%;opacity:0}}
+.flow-note{margin:18px auto 0;font-size:.94rem;color:rgba(255,255,255,.62);max-width:56ch}
 
-/* ---------- credenciais Gabriela ---------- */
-.creds{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px}
+/* ---------- credenciais ---------- */
+.creds{display:grid;grid-template-columns:1fr;gap:12px;margin-top:26px}
 .cred{
-  display:flex;gap:14px;align-items:flex-start;background:var(--white);
-  border:1px solid var(--line);border-left:3px solid var(--money);border-radius:10px;padding:18px 20px;
+  background:var(--white);border:1px solid var(--line);border-top:3px solid var(--money);
+  border-radius:10px;padding:20px 18px;
+  display:flex;flex-direction:column;align-items:center;
 }
-.cred .rhombus{margin-top:6px;width:11px;height:11px}
-.cred p{font-size:.96rem;color:var(--text-soft)}
-.cred strong{display:block;color:var(--text);font-weight:600;font-family:var(--display);font-size:1rem;margin-bottom:3px}
+.cred .rhombus{margin-bottom:11px}
+.cred strong{
+  display:block;font-family:var(--display);font-size:1rem;font-weight:600;
+  color:var(--text);margin-bottom:5px;
+}
+.cred p{font-size:.94rem;color:var(--text-soft);max-width:38ch}
 
-/* ---------- produto GuiaCash ---------- */
+/* ---------- perfis ---------- */
+.people{display:grid;grid-template-columns:1fr;gap:18px}
+.person{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r);
+  padding:30px 22px;display:flex;flex-direction:column;align-items:center;
+}
+.person.build{border-top:3px solid var(--build)}
+.person.money{border-top:3px solid var(--money)}
+.portrait{position:relative;margin-bottom:18px}
+.portrait img{width:118px;height:118px;object-fit:cover;border-radius:12px}
+.portrait .mark{
+  position:absolute;bottom:-9px;left:50%;margin-left:-12px;
+  width:22px;height:22px;transform:rotate(45deg);border:3px solid var(--white);
+}
+.person.build .mark{background:var(--build)}
+.person.money .mark{background:var(--money)}
+.person-name{font-family:var(--display);font-size:1.26rem;font-weight:700;letter-spacing:-.02em}
+.person-role{font-family:var(--mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;margin-top:6px}
+.person.build .person-role{color:var(--build-dk)}
+.person.money .person-role{color:var(--money-dk)}
+.person-bio{margin-top:18px;color:var(--text-soft);font-size:.98rem;max-width:44ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:18px}
+.tag{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;
+  padding:5px 10px;border-radius:999px;border:1px solid var(--line);
+  color:var(--text-soft);background:#fbfcfd;
+}
+.person-foot{margin-top:auto;padding-top:22px}
+
+/* ---------- produto ---------- */
 .product{
   background:var(--ink-2);color:#fff;border-radius:var(--r);overflow:hidden;
-  display:grid;grid-template-columns:1.1fr .9fr;gap:0;
-  border:1px solid var(--line-dark);
+  border:1px solid var(--line-dark);display:grid;grid-template-columns:1fr;
 }
-.product-copy{padding:46px 42px}
-.product-copy h2{color:#fff;font-size:clamp(1.7rem,2.6vw,2.2rem);margin:14px 0 16px}
-.product-copy p{color:rgba(255,255,255,.68);font-size:1.03rem;max-width:46ch}
-.product-list{list-style:none;margin:24px 0 30px;display:flex;flex-direction:column;gap:11px}
-.product-list li{display:flex;gap:12px;align-items:flex-start;font-size:.98rem;color:rgba(255,255,255,.8)}
-.product-list .rhombus{margin-top:7px;width:9px;height:9px;background:var(--gold)}
+.product-copy{padding:34px 22px;display:flex;flex-direction:column;align-items:center}
+.product-copy h2{color:#fff;margin:12px auto 12px;max-width:26ch}
+.product-copy p{color:rgba(255,255,255,.7);font-size:1rem;max-width:46ch}
+.product-list{list-style:none;margin:22px auto 26px;display:flex;flex-direction:column;gap:11px;align-items:center}
+.product-list li{display:flex;gap:11px;align-items:center;font-size:.96rem;color:rgba(255,255,255,.82);text-align:left}
 .product-side{
   background:linear-gradient(150deg,rgba(92,75,223,.28),rgba(0,145,150,.28));
-  display:flex;flex-direction:column;justify-content:center;gap:14px;padding:46px 38px;
-  border-left:1px solid var(--line-dark);
+  border-top:1px solid var(--line-dark);
+  padding:28px 22px;display:flex;flex-wrap:wrap;justify-content:center;gap:22px;
 }
-.stat{border-left:2px solid var(--gold);padding-left:16px}
-.stat b{display:block;font-family:var(--display);font-size:1.9rem;font-weight:700;letter-spacing:-.03em}
-.stat span{font-family:var(--mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.stat{border-top:2px solid var(--gold);padding-top:12px;min-width:120px}
+.stat b{display:block;font-family:var(--display);font-size:1.65rem;font-weight:700;letter-spacing:-.03em}
+.stat span{font-family:var(--mono);font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.68)}
 
 /* ---------- processo ---------- */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--white)}
-.step{padding:32px 28px;border-right:1px solid var(--line)}
-.step:last-child{border-right:none}
-.step-n{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;color:var(--muted)}
-.step h3{margin:12px 0 10px;font-size:1.16rem}
-.step p{font-size:.97rem;color:var(--text-soft)}
+.steps{
+  display:grid;grid-template-columns:1fr;background:var(--white);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+}
+.step{padding:30px 22px;border-bottom:1px solid var(--line)}
+.step:last-child{border-bottom:none}
+.step-n{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.step h3{margin:10px auto 9px}
+.step p{font-size:.96rem;color:var(--text-soft);max-width:38ch;margin:0 auto}
 
-/* ---------- CTA final ---------- */
-.close{background:var(--ink);color:#fff;padding:92px 0;text-align:center;position:relative;overflow:hidden}
+/* ---------- fechamento ---------- */
+.close{background:var(--ink);color:#fff;padding:64px 0;position:relative;overflow:hidden}
 .close::after{
   content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(700px 320px at 50% 100%, rgba(245,167,34,.14), transparent 70%);
+  background:radial-gradient(560px 260px at 50% 100%, rgba(245,167,34,.15), transparent 72%);
 }
 .close .shell{position:relative;z-index:2}
-.close h2{color:#fff;max-width:24ch;margin:16px auto 18px}
-.close p{color:rgba(255,255,255,.68);max-width:52ch;margin:0 auto}
-.close-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
+.close h2{color:#fff;max-width:24ch;margin:14px auto 14px}
+.close p{color:rgba(255,255,255,.7);max-width:50ch;margin:0 auto}
 
-/* ---------- footer ---------- */
-footer{background:var(--ink-2);color:rgba(255,255,255,.62);padding:52px 0 34px;font-size:.9rem}
-.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;align-items:start}
-footer h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42);font-weight:400;margin-bottom:14px}
+/* ---------- rodapé ---------- */
+footer{background:var(--ink-2);color:rgba(255,255,255,.64);padding:44px 0 30px;font-size:.92rem}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:30px;justify-items:center}
+footer .brand{justify-content:center}
+footer .brand-name small{
+  display:block;font-family:var(--mono);font-weight:400;font-size:.55rem;
+  letter-spacing:.17em;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:2px;
+}
+footer h4{
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.42);font-weight:400;margin-bottom:13px;
+}
 footer a{text-decoration:none;transition:color .2s}
 footer a:hover{color:#fff}
+.foot-about{max-width:34ch;margin-top:14px}
 .foot-links{list-style:none;display:flex;flex-direction:column;gap:9px}
 .foot-legal{
-  margin-top:40px;padding-top:22px;border-top:1px solid var(--line-dark);
-  font-family:var(--mono);font-size:.72rem;line-height:1.9;color:rgba(255,255,255,.42);
+  margin-top:34px;padding-top:20px;border-top:1px solid var(--line-dark);
+  font-family:var(--mono);font-size:.68rem;line-height:2;color:rgba(255,255,255,.42);
 }
 
 /* ---------- reveal ---------- */
-.rise{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rise{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .rise.in{opacity:1;transform:none}
-
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .rise{opacity:1;transform:none}
@@ -326,36 +333,73 @@ footer a:hover{color:#fff}
 }
 
 /* ============================================================
-   RESPONSIVO
+   >= 600px — tablet pequeno
    ============================================================ */
-@media (max-width:980px){
-  .svc-grid{grid-template-columns:repeat(2,1fr)}
-  .product{grid-template-columns:1fr}
-  .product-side{border-left:none;border-top:1px solid var(--line-dark);flex-direction:row;flex-wrap:wrap;gap:26px;padding:32px 38px}
-  .steps{grid-template-columns:1fr}
-  .step{border-right:none;border-bottom:1px solid var(--line)}
-  .step:last-child{border-bottom:none}
+@media (min-width:600px){
+  .shell{padding:0 28px}
+  h1{font-size:2.7rem}
+  h2{font-size:2rem}
+  .actions{flex-direction:row;justify-content:center;gap:12px}
+  .hero{padding-top:72px}
+  .hero-meta{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px 24px;padding-bottom:64px}
+  .svc-grid{grid-template-columns:1fr 1fr}
+  .creds{grid-template-columns:1fr 1fr}
+  .nav-cta-long{display:inline}
+  .nav-cta-short{display:none}
+  .brand img{height:30px;width:30px}
+  .brand-name{font-size:1.1rem}
+  .brand-name small{
+    display:block;font-family:var(--mono);font-weight:400;font-size:.57rem;
+    letter-spacing:.17em;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:2px;
+  }
+  .nav{height:70px}
 }
-@media (max-width:768px){
-  .nav-links{display:none}
-  .nav{height:64px}
-  .band{padding:66px 0}
-  .hero{padding-top:64px}
-  .hero-meta{padding-bottom:56px;margin-top:34px}
-  .seam{grid-template-columns:1fr}
-  .seam-half.left{text-align:left;border-right:none;border-bottom:1px solid var(--line-dark)}
-  .seam-half.left p{margin-left:0}
-  .seam-node{display:none}
-  .people{grid-template-columns:1fr}
-  .svc-grid{grid-template-columns:1fr}
-  .creds{grid-template-columns:1fr}
-  .product-copy,.product-side{padding:32px 24px}
-  .foot-grid{grid-template-columns:1fr;gap:28px}
-  .flow-track{flex-direction:column;align-items:stretch}
-  .flow-step{white-space:normal;text-align:center}
-  .flow-link{width:1px;height:22px;min-width:0;margin:0 auto;flex:none}
-  .flow-link::after{animation:travel-v 3.4s linear infinite;left:-2px}
-  @keyframes travel-v{from{top:0;opacity:0}12%{opacity:1}88%{opacity:1}to{top:100%;opacity:0}}
+
+/* ============================================================
+   >= 860px — desktop
+   ============================================================ */
+@media (min-width:860px){
+  h1{font-size:3.4rem;letter-spacing:-.035em}
+  h2{font-size:2.4rem}
+  h3{font-size:1.18rem}
+  .eyebrow{font-size:.7rem}
+  .lede{font-size:1.12rem}
+  .hero{padding-top:96px}
+  .hero h1{max-width:24ch}
+  .hero-lede{font-size:1.12rem;max-width:56ch}
+  .band{padding:88px 0}
+  .band-head{margin-bottom:48px}
+  .close{padding:88px 0}
+
+  .nav-links{display:flex;align-items:center;gap:24px}
+  .nav-links a{font-size:.93rem;font-weight:500;color:rgba(255,255,255,.76);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:#fff}
+
+  .seam{grid-template-columns:1fr 1fr}
+  .seam-half{padding:40px 32px}
+  .seam-half + .seam-half{border-top:none;border-left:1px solid var(--line-dark)}
+  .seam-half h3{font-size:1.4rem}
+
+  .svc-grid{grid-template-columns:repeat(3,1fr);gap:18px}
+  .people{grid-template-columns:1fr 1fr;gap:22px}
+  .person{padding:36px 26px}
+  .portrait img{width:132px;height:132px}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .step{border-bottom:none;border-right:1px solid var(--line);padding:34px 26px}
+  .step:last-child{border-right:none}
+
+  .product-copy{padding:52px 44px}
+  .product-side{padding:34px 44px;gap:34px}
+  .stat b{font-size:1.85rem}
+
+  /* fluxo na horizontal */
+  .flow{padding:34px 30px}
+  .flow-track{flex-direction:row;align-items:center;max-width:100%;justify-content:center}
+  .flow-link{width:auto;flex:1;min-width:20px;max-width:70px;height:1px;margin:0 8px}
+  .flow-link::after{left:0;top:-2px;animation:travel-h 3.4s linear infinite}
+  .flow-step{white-space:nowrap}
+
+  .foot-grid{grid-template-columns:1.3fr 1fr 1fr;gap:36px;align-items:start}
 }
 </style>
 </head>
@@ -375,38 +419,40 @@ footer a:hover{color:#fff}
       <a href="#guiacash">GuiaCash</a>
       <a href="#processo">Como trabalhamos</a>
     </nav>
-    <a class="btn btn-solid" style="background:var(--gold);color:var(--ink)" href="https://wa.me/555192491010" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    <a class="btn btn-gold" href="https://wa.me/555192491010" target="_blank" rel="noopener">
+      <span class="nav-cta-long">Falar no WhatsApp</span><span class="nav-cta-short">WhatsApp</span>
+    </a>
   </div>
 </header>
 
 <!-- ===================== HERO ===================== -->
 <section class="hero" id="topo">
   <div class="shell">
-    <p class="eyebrow">Porto Alegre · RS &nbsp;/&nbsp; atendimento remoto no Brasil e EUA</p>
+    <p class="eyebrow">Porto Alegre · RS &nbsp;/&nbsp; atendimento remoto</p>
     <h1>Software que <em>executa</em>. Números que <b>orientam</b>.</h1>
     <p class="hero-lede">
       Duas frentes, uma casa. Jonatan constrói os aplicativos e as automações que tiram a
       operação do trabalho manual. Gabriela organiza o dinheiro do negócio e da família até a
       decisão ficar óbvia.
     </p>
-    <div class="hero-actions">
+    <div class="actions">
       <a class="btn btn-build" href="#desenvolvimento">
-        Ver serviços de desenvolvimento
+        Ver desenvolvimento
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
       <a class="btn btn-ghost-light" href="#financas">Ver consultoria financeira</a>
     </div>
     <div class="hero-meta">
       <span><i></i>Next.js · Supabase · n8n · Docker</span>
-      <span><i></i>Diagnóstico financeiro PF, PJ e dívidas</span>
-      <span><i></i>Projetos sob medida, do escopo ao deploy</span>
+      <span><i></i>Diagnóstico de PF, PJ e dívidas</span>
+      <span><i></i>Do escopo ao deploy</span>
     </div>
   </div>
 
   <!-- assinatura: as duas frentes se encontram no losango da marca -->
   <div class="seam-wrap">
+    <span class="seam-node"></span>
     <div class="seam">
-      <span class="seam-node"></span>
       <a class="seam-half left" href="#desenvolvimento">
         <p class="eyebrow">Frente 01</p>
         <h3>Desenvolvimento &amp; Automação</h3>
@@ -428,7 +474,7 @@ footer a:hover{color:#fff}
   <div class="shell">
     <div class="band-head rise">
       <p class="eyebrow">Frente 01 · Desenvolvimento &amp; Automação</p>
-      <h2>Se alguém da equipe faz isso à mão toda semana, dá para automatizar.</h2>
+      <h2>Se alguém faz isso à mão toda semana, dá para automatizar.</h2>
       <p class="lede">
         Construímos o sistema em vez de vender licença de sistema. Você recebe o código,
         o banco e o servidor no seu nome — e a documentação para não depender de ninguém.
@@ -437,37 +483,43 @@ footer a:hover{color:#fff}
 
     <div class="svc-grid">
       <article class="svc svc-build rise">
-        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Aplicativos sob medida</h3></div>
+        <span class="rhombus rh-build"></span>
+        <h3>Aplicativos sob medida</h3>
         <p>Web e mobile para o processo que a sua operação já tem, com login, permissões por perfil e painéis de acompanhamento.</p>
         <ul><li>Next.js</li><li>React</li><li>Supabase</li><li>PostgreSQL</li><li>RLS</li></ul>
       </article>
 
       <article class="svc svc-build rise">
-        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Automações em n8n</h3></div>
+        <span class="rhombus rh-build"></span>
+        <h3>Automações em n8n</h3>
         <p>Fluxos que puxam dados, tratam, avisam e registram. Relatório que chega pronto no WhatsApp ou no e-mail, sem alguém montando planilha.</p>
         <ul><li>n8n</li><li>webhooks</li><li>APIs REST</li><li>WhatsApp</li><li>Google Workspace</li></ul>
       </article>
 
       <article class="svc svc-build rise">
-        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Integrações entre sistemas</h3></div>
+        <span class="rhombus rh-build"></span>
+        <h3>Integrações entre sistemas</h3>
         <p>ERP, CRM, contabilidade, e-commerce e banco conversando entre si. Um dado é digitado uma vez e aparece em todos os lugares certos.</p>
         <ul><li>SharePoint</li><li>Microsoft 365</li><li>OFX</li><li>ETL</li></ul>
       </article>
 
       <article class="svc svc-build rise">
-        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Infraestrutura e deploy</h3></div>
+        <span class="rhombus rh-build"></span>
+        <h3>Infraestrutura e deploy</h3>
         <p>Servidor, containers, domínio, backup e monitoramento configurados com segurança e atualização contínua.</p>
         <ul><li>Docker</li><li>VPS Linux</li><li>EasyPanel</li><li>CI/CD</li><li>firewall</li></ul>
       </article>
 
       <article class="svc svc-build rise">
-        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Dados e indicadores</h3></div>
+        <span class="rhombus rh-build"></span>
+        <h3>Dados e indicadores</h3>
         <p>Modelagem dos dados e painéis que respondem às perguntas da diretoria — margem, custo por obra, produtividade — atualizados sozinhos.</p>
         <ul><li>Power BI</li><li>modelagem semântica</li><li>orquestração</li></ul>
       </article>
 
       <article class="svc svc-build rise">
-        <div class="svc-head"><span class="rhombus rh-build"></span><h3>IA aplicada ao processo</h3></div>
+        <span class="rhombus rh-build"></span>
+        <h3>IA aplicada ao processo</h3>
         <p>Leitura de documento, classificação de lançamento, resposta a cliente e camada de dados pronta para agentes — com o resultado sempre auditável.</p>
         <ul><li>MCP</li><li>agentes</li><li>OCR</li><li>classificação</li></ul>
       </article>
@@ -480,7 +532,7 @@ footer a:hover{color:#fff}
         <span class="flow-link"></span>
         <span class="flow-step">n8n classifica</span>
         <span class="flow-link"></span>
-        <span class="flow-step">grava no banco de dados</span>
+        <span class="flow-step">grava no banco</span>
         <span class="flow-link"></span>
         <span class="flow-step">painel atualiza</span>
         <span class="flow-link"></span>
@@ -492,7 +544,7 @@ footer a:hover{color:#fff}
       </p>
     </div>
 
-    <div style="margin-top:36px">
+    <div class="actions">
       <a class="btn btn-build" href="https://wa.me/555192491010?text=Quero%20falar%20sobre%20um%20projeto%20de%20desenvolvimento" target="_blank" rel="noopener">
         Descrever meu projeto
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -515,32 +567,38 @@ footer a:hover{color:#fff}
 
     <div class="svc-grid">
       <article class="svc svc-money rise">
-        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Diagnóstico financeiro</h3></div>
+        <span class="rhombus rh-money"></span>
+        <h3>Diagnóstico financeiro</h3>
         <p>Levantamento das três áreas, separação de PF e PJ e um retrato honesto da situação atual, com prioridades definidas.</p>
       </article>
 
       <article class="svc svc-money rise">
-        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Negócio: caixa e preço</h3></div>
+        <span class="rhombus rh-money"></span>
+        <h3>Negócio: caixa e preço</h3>
         <p>Fluxo de caixa, resultado por período, custo real e precificação. Para saber se o mês fechou no lucro antes do contador dizer.</p>
       </article>
 
       <article class="svc svc-money rise">
-        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Resolução de dívidas</h3></div>
+        <span class="rhombus rh-money"></span>
+        <h3>Resolução de dívidas</h3>
         <p>Mapa de todas as dívidas, conferência de juros e cláusulas, identificação de superendividamento e estratégia de negociação com o banco.</p>
       </article>
 
       <article class="svc svc-money rise">
-        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Família e patrimônio</h3></div>
+        <span class="rhombus rh-money"></span>
+        <h3>Família e patrimônio</h3>
         <p>Orçamento que a casa consegue seguir, reserva de emergência, uso consciente do cartão e construção de patrimônio no ritmo possível.</p>
       </article>
 
       <article class="svc svc-money rise">
-        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Mentoria acompanhada</h3></div>
+        <span class="rhombus rh-money"></span>
+        <h3>Mentoria acompanhada</h3>
         <p>Encontros periódicos para manter o plano de pé, revisar metas e tratar as decisões que aparecem no caminho.</p>
       </article>
 
       <article class="svc svc-money rise">
-        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Treinamento de equipe e família</h3></div>
+        <span class="rhombus rh-money"></span>
+        <h3>Treinamento de equipe e família</h3>
         <p>Todo mundo que mexe no dinheiro entendendo o mesmo painel e a mesma regra. É o que faz o controle durar depois da consultoria.</p>
       </article>
     </div>
@@ -564,7 +622,7 @@ footer a:hover{color:#fff}
       </div>
     </div>
 
-    <div style="margin-top:36px">
+    <div class="actions">
       <a class="btn btn-money" href="https://wa.me/555192491010?text=Quero%20falar%20sobre%20consultoria%20financeira" target="_blank" rel="noopener">
         Agendar conversa inicial
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -584,16 +642,12 @@ footer a:hover{color:#fff}
 
     <div class="people">
       <article class="person build rise">
-        <div class="person-top">
-          <div class="portrait">
-            <img src="jonatan.jpg" alt="Jonatan Pelisoli">
-            <span class="mark"></span>
-          </div>
-          <div>
-            <p class="person-name">Jonatan Pelisoli</p>
-            <p class="person-role">Desenvolvedor · Automação e Dados</p>
-          </div>
+        <div class="portrait">
+          <img src="jonatan.jpg" alt="Jonatan Pelisoli">
+          <span class="mark"></span>
         </div>
+        <p class="person-name">Jonatan Pelisoli</p>
+        <p class="person-role">Desenvolvedor · Automação e Dados</p>
         <p class="person-bio">
           Desenvolvedor e especialista em IA aplicada. Construiu de ponta a ponta as plataformas da
           casa — banco de dados, regras de acesso, importação de extratos e assistente de IA — e mantém
@@ -610,16 +664,12 @@ footer a:hover{color:#fff}
       </article>
 
       <article class="person money rise">
-        <div class="person-top">
-          <div class="portrait">
-            <img src="gabriela.jpg" alt="Gabriela Vieira">
-            <span class="mark"></span>
-          </div>
-          <div>
-            <p class="person-name">Gabriela Vieira</p>
-            <p class="person-role">Economista · Consultoria Financeira</p>
-          </div>
+        <div class="portrait">
+          <img src="gabriela.jpg" alt="Gabriela Vieira">
+          <span class="mark"></span>
         </div>
+        <p class="person-name">Gabriela Vieira</p>
+        <p class="person-role">Economista · Consultoria Financeira</p>
         <p class="person-bio">
           Começou a empreender aos 20 e descobriu a empresa da família com R$ 1 milhão em dívidas.
           Em vez de sair, ficou: especializou-se em resolução de dívidas e economia comportamental,
@@ -652,19 +702,19 @@ footer a:hover{color:#fff}
           foto, áudio ou texto.
         </p>
         <ul class="product-list">
-          <li><span class="rhombus"></span>Resultado da PF e DRE da PJ no mesmo lugar</li>
-          <li><span class="rhombus"></span>Mapa de dívidas com simulador de juros e cláusulas</li>
-          <li><span class="rhombus"></span>Exame financeiro com diagnóstico automático</li>
-          <li><span class="rhombus"></span>Acesso colaborativo com permissão por pessoa</li>
+          <li><span class="rhombus rh-gold"></span>Resultado da PF e DRE da PJ no mesmo lugar</li>
+          <li><span class="rhombus rh-gold"></span>Mapa de dívidas com simulador de juros e cláusulas</li>
+          <li><span class="rhombus rh-gold"></span>Exame financeiro com diagnóstico automático</li>
+          <li><span class="rhombus rh-gold"></span>Acesso colaborativo com permissão por pessoa</li>
         </ul>
-        <a class="btn btn-solid" style="background:#fff;color:var(--ink)" href="https://guiacash-app.visioncapacita.com.br" target="_blank" rel="noopener">
+        <a class="btn btn-light" href="https://guiacash-app.visioncapacita.com.br" target="_blank" rel="noopener">
           Conhecer o GuiaCash
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
       <div class="product-side">
         <div class="stat"><b>3 áreas</b><span>PF, PJ e dívidas</span></div>
-        <div class="stat"><b>15 min</b><span>por semana de manutenção</span></div>
+        <div class="stat"><b>15 min</b><span>por semana</span></div>
         <div class="stat"><b>12</b><span>painéis de controle</span></div>
       </div>
     </div>
@@ -705,8 +755,8 @@ footer a:hover{color:#fff}
     <p class="eyebrow">Primeira conversa sem custo</p>
     <h2>Conte o problema. A gente diz qual das duas frentes resolve.</h2>
     <p>Se for processo manual, código e automação. Se for dinheiro, consultoria. Se for os dois, você já está no lugar certo.</p>
-    <div class="close-actions">
-      <a class="btn btn-solid" style="background:var(--gold);color:var(--ink)" href="https://wa.me/555192491010" target="_blank" rel="noopener">
+    <div class="actions">
+      <a class="btn btn-gold" href="https://wa.me/555192491010" target="_blank" rel="noopener">
         Falar no WhatsApp
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
@@ -720,11 +770,11 @@ footer a:hover{color:#fff}
   <div class="shell">
     <div class="foot-grid">
       <div>
-        <a class="brand" href="#topo" style="margin-bottom:14px">
+        <a class="brand" href="#topo">
           <img src="vision-logo.png" alt="Vision">
           <span class="brand-name">Vision<small>Educação e Capacitação</small></span>
         </a>
-        <p style="max-width:34ch;margin-top:14px">
+        <p class="foot-about center">
           Desenvolvimento de software, automação e consultoria financeira.
           Porto Alegre, RS — com atendimento remoto.
         </p>
@@ -758,7 +808,6 @@ footer a:hover{color:#fff}
 </footer>
 
 <script>
-/* reveal ao rolar */
 (function(){
   var els = document.querySelectorAll('.rise');
   if(!('IntersectionObserver' in window)){
@@ -769,8 +818,8 @@ footer a:hover{color:#fff}
     entries.forEach(function(e){
       if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
     });
-  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
-  els.forEach(function(el,i){ el.style.transitionDelay = (Math.min(i,4)*60) + 'ms'; io.observe(el); });
+  }, {threshold:.10, rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el,i){ el.style.transitionDelay = (Math.min(i,4)*55) + 'ms'; io.observe(el); });
 })();
 </script>
 </body>
