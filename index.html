@@ -1,349 +1,777 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Vision Educação - Clareza e Direção para o Seu Dinheiro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision — Sistemas sob medida e consultoria financeira</title>
+<meta name="description" content="Aplicativos sob medida, automações em n8n e infraestrutura com Jonatan Pelisoli. Consultoria financeira para família e negócio com Gabriela Vieira. Porto Alegre, atendimento remoto.">
 
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="vision-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            /* Paleta de Cores Vision Educação */
-            --primary: #5c55be; 
-            --secondary: #0f172a; 
-            --accent: #fbbf24; /* Dourado/Amarelo */
-            --accent-hover: #f59e0b;
-            --white: #ffffff;
-            --dark: #0f172a;
-            --success: #10b981;
-            --bg-light: #f8fafc;
-            --text-gray: #64748b;
-            --gradient-primary: linear-gradient(135deg, #5c55be 0%, #312e81 100%);
-            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --ink:#0A1020;
+  --ink-2:#111B31;
+  --ink-3:#1B2742;
+  --paper:#F4F6F9;
+  --white:#FFFFFF;
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+  --build:#009196;          /* frente Desenvolvimento */
+  --build-lt:#25C2BE;
+  --build-dk:#00666E;
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-light);
-            color: #1e293b;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+  --money:#5C4BDF;          /* frente Financeira */
+  --money-lt:#8B7BFF;
+  --money-dk:#3F32A8;
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  --gold:#F5A722;
+  --text:#161C2A;
+  --text-soft:#5A6579;
+  --muted:#8A96AB;
+  --line:#E3E7ED;
+  --line-dark:rgba(255,255,255,.12);
 
-        /* HEADER & NAV */
-        header {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-        }
+  --display:'Familjen Grotesk',system-ui,sans-serif;
+  --body:'Inter Tight',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
 
-        .header-grid {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  --shell:1180px;
+  --r:14px;
+}
 
-        .logo img { height: 40px; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--body);
+  background:var(--paper);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
 
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
+.shell{width:100%;max-width:var(--shell);margin:0 auto;padding:0 24px}
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
+/* tipografia */
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:-.02em}
+h1{font-size:clamp(2.3rem,5.4vw,4.1rem);font-weight:700;letter-spacing:-.035em}
+h2{font-size:clamp(1.85rem,3.4vw,2.85rem);letter-spacing:-.03em}
+h3{font-size:1.3rem}
+p{font-size:1.05rem}
 
-        .nav-links a:hover { color: var(--primary); }
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.lede{font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--text-soft);max-width:62ch}
 
-        .cta-header {
-            background-color: var(--accent);
-            color: var(--dark) !important;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: 700 !important;
-            text-transform: uppercase;
-            font-size: 0.85rem !important;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
-        }
-        
-        .cta-header:hover {
-            background-color: var(--accent-hover);
-            transform: translateY(-2px);
-        }
+/* botões */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--body);font-weight:600;font-size:.98rem;
+  padding:14px 24px;border-radius:999px;border:1px solid transparent;
+  text-decoration:none;cursor:pointer;
+  transition:transform .18s ease,background .18s ease,border-color .18s ease,color .18s ease;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-solid{background:var(--ink);color:#fff}
+.btn-solid:hover{background:var(--ink-3)}
+.btn-build{background:var(--build);color:#fff}
+.btn-build:hover{background:var(--build-dk)}
+.btn-money{background:var(--money);color:#fff}
+.btn-money:hover{background:var(--money-dk)}
+.btn-ghost-light{border-color:rgba(255,255,255,.28);color:#fff}
+.btn-ghost-light:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-ghost{border-color:var(--line);color:var(--text);background:#fff}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn svg{width:17px;height:17px;flex-shrink:0}
 
-        /* HERO SECTION */
-        .hero {
-            background: var(--gradient-primary);
-            color: var(--white);
-            padding: 180px 0 120px; 
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
-        /* Efeito de brilho de fundo no Hero */
-        .hero::before {
-            content: ''; position: absolute; top: -50%; left: 50%; width: 800px; height: 800px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: translateX(-50%); border-radius: 50%; pointer-events: none;
-        }
+/* losango — assinatura vinda da marca */
+.rhombus{width:14px;height:14px;transform:rotate(45deg);flex-shrink:0}
+.rh-build{background:var(--build)}
+.rh-money{background:var(--money)}
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 25px;
-            letter-spacing: -1.5px;
-            position: relative;
-            z-index: 2;
-        }
+/* ============================================================
+   HEADER
+   ============================================================ */
+header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(10,16,32,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-dark);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:24px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.brand img{height:32px;width:32px}
+.brand-name{font-family:var(--display);font-weight:700;font-size:1.12rem;color:#fff;letter-spacing:-.02em}
+.brand-name small{
+  display:block;font-family:var(--mono);font-weight:400;font-size:.6rem;
+  letter-spacing:.18em;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:1px;
+}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{
+  font-size:.95rem;font-weight:500;color:rgba(255,255,255,.76);text-decoration:none;
+  transition:color .2s;
+}
+.nav-links a:hover{color:#fff}
+.nav .btn{padding:11px 20px;font-size:.9rem}
 
-        .hero .highlight { color: var(--accent); }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{background:var(--ink);color:#fff;padding:96px 0 0;position:relative;overflow:hidden}
+.hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(620px 420px at 12% 8%, rgba(0,145,150,.20), transparent 68%),
+    radial-gradient(620px 420px at 88% 4%, rgba(92,75,223,.22), transparent 68%);
+}
+.hero .shell{position:relative;z-index:2}
+.hero h1{color:#fff;max-width:19ch}
+.hero h1 em{font-style:normal;color:var(--build-lt)}
+.hero h1 b{font-weight:700;color:var(--money-lt)}
+.hero-lede{color:rgba(255,255,255,.72);max-width:56ch;margin-top:26px;font-size:1.13rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:44px;padding-bottom:80px;
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;color:rgba(255,255,255,.5);
+}
+.hero-meta span{display:flex;align-items:center;gap:9px}
+.hero-meta i{width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
 
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 45px;
-            color: #e2e8f0;
-            font-weight: 400;
-            position: relative;
-            z-index: 2;
-        }
+/* costura: as duas frentes se encontram no losango */
+.seam{position:relative;z-index:3;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-dark)}
+.seam-half{
+  padding:36px 30px 40px;text-decoration:none;color:#fff;position:relative;
+  transition:background .25s ease;
+}
+.seam-half:hover{background:rgba(255,255,255,.04)}
+.seam-half.left{text-align:right;border-right:1px solid var(--line-dark)}
+.seam-half .eyebrow{color:rgba(255,255,255,.55)}
+.seam-half h3{margin:12px 0 8px;font-size:1.42rem;font-weight:600}
+.seam-half p{font-size:.96rem;color:rgba(255,255,255,.62);max-width:34ch}
+.seam-half.left p{margin-left:auto}
+.seam-half.left h3{color:var(--build-lt)}
+.seam-half.right h3{color:var(--money-lt)}
+.seam-arrow{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;margin-top:18px;display:inline-block;
+  color:rgba(255,255,255,.55);border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:3px;
+}
+.seam-node{
+  position:absolute;left:50%;top:0;transform:translate(-50%,-50%) rotate(45deg);
+  width:34px;height:34px;background:var(--ink);
+  border:2px solid var(--gold);z-index:4;
+}
+.seam-wrap{position:relative;background:var(--ink-2)}
 
-        .cta-btn {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--dark);
-            padding: 18px 45px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 1rem;
-            text-transform: uppercase;
-            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.4);
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 2;
-        }
+/* ============================================================
+   SEÇÕES CLARAS
+   ============================================================ */
+.band{padding:96px 0}
+.band-paper{background:var(--paper)}
+.band-white{background:var(--white)}
+.band-head{max-width:70ch;margin-bottom:56px}
+.band-head h2{margin:14px 0 16px}
 
-        .cta-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(251, 191, 36, 0.6);
-            background: var(--accent-hover);
-        }
+/* ---------- perfis ---------- */
+.people{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.person{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r);
+  padding:26px;display:flex;flex-direction:column;
+}
+.person.build{border-top:3px solid var(--build)}
+.person.money{border-top:3px solid var(--money)}
+.person-top{display:flex;gap:20px;align-items:flex-start}
+.portrait{position:relative;flex-shrink:0}
+.portrait img{width:112px;height:112px;object-fit:cover;border-radius:10px}
+.portrait .mark{
+  position:absolute;bottom:-9px;right:-9px;width:24px;height:24px;transform:rotate(45deg);
+  border:3px solid var(--white);
+}
+.person.build .mark{background:var(--build)}
+.person.money .mark{background:var(--money)}
+.person-name{font-family:var(--display);font-size:1.34rem;font-weight:700;letter-spacing:-.02em}
+.person-role{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+.person.build .person-role{color:var(--build-dk)}
+.person.money .person-role{color:var(--money-dk)}
+.person-bio{margin-top:20px;color:var(--text-soft);font-size:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.tag{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;
+  padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--text-soft);
+  background:#fbfcfd;
+}
+.person-foot{margin-top:auto;padding-top:24px}
 
-        /* ABOUT / SERVICES SECTION */
-        .services { padding: 100px 0; background-color: var(--white); }
+/* ---------- serviços ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r);
+  padding:28px 24px;transition:border-color .2s ease,transform .2s ease;
+}
+.svc:hover{transform:translateY(-3px)}
+.svc-build:hover{border-color:var(--build)}
+.svc-money:hover{border-color:var(--money)}
+.svc-head{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+.svc h3{font-size:1.14rem}
+.svc p{font-size:.97rem;color:var(--text-soft)}
+.svc ul{list-style:none;margin-top:16px;display:flex;flex-wrap:wrap;gap:6px}
+.svc li{
+  font-family:var(--mono);font-size:.67rem;color:var(--muted);
+  border:1px solid var(--line);border-radius:5px;padding:3px 7px;
+}
 
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 2.8rem; font-weight: 800; color: var(--dark); margin-bottom: 15px; }
-        .section-title p { font-size: 1.1rem; color: var(--text-gray); max-width: 600px; margin: 0 auto; }
+/* ---------- fluxo de automação ---------- */
+.flow{
+  margin-top:44px;background:var(--ink);border-radius:var(--r);padding:34px 28px;color:#fff;
+  overflow:hidden;
+}
+.flow-title{font-family:var(--mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.flow-track{display:flex;align-items:center;gap:0;margin-top:22px;flex-wrap:wrap}
+.flow-step{
+  font-family:var(--mono);font-size:.82rem;padding:10px 15px;border:1px solid rgba(255,255,255,.2);
+  border-radius:7px;background:rgba(255,255,255,.04);white-space:nowrap;
+}
+.flow-link{flex:1;min-width:26px;height:1px;position:relative;background:rgba(255,255,255,.18);margin:0 10px}
+.flow-link::after{
+  content:'';position:absolute;top:-2px;left:0;width:5px;height:5px;background:var(--build-lt);
+  transform:rotate(45deg);animation:travel 3.4s linear infinite;
+}
+.flow-note{margin-top:20px;font-size:.95rem;color:rgba(255,255,255,.6);max-width:60ch}
+@keyframes travel{from{left:0;opacity:0}12%{opacity:1}88%{opacity:1}to{left:100%;opacity:0}}
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+/* ---------- credenciais Gabriela ---------- */
+.creds{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:36px}
+.cred{
+  display:flex;gap:14px;align-items:flex-start;background:var(--white);
+  border:1px solid var(--line);border-left:3px solid var(--money);border-radius:10px;padding:18px 20px;
+}
+.cred .rhombus{margin-top:6px;width:11px;height:11px}
+.cred p{font-size:.96rem;color:var(--text-soft)}
+.cred strong{display:block;color:var(--text);font-weight:600;font-family:var(--display);font-size:1rem;margin-bottom:3px}
 
-        .service-card {
-            background: var(--white);
-            padding: 45px 30px;
-            border-radius: 24px;
-            border: 1px solid #f1f5f9;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-            transition: 0.4s;
-            text-align: center;
-        }
+/* ---------- produto GuiaCash ---------- */
+.product{
+  background:var(--ink-2);color:#fff;border-radius:var(--r);overflow:hidden;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:0;
+  border:1px solid var(--line-dark);
+}
+.product-copy{padding:46px 42px}
+.product-copy h2{color:#fff;font-size:clamp(1.7rem,2.6vw,2.2rem);margin:14px 0 16px}
+.product-copy p{color:rgba(255,255,255,.68);font-size:1.03rem;max-width:46ch}
+.product-list{list-style:none;margin:24px 0 30px;display:flex;flex-direction:column;gap:11px}
+.product-list li{display:flex;gap:12px;align-items:flex-start;font-size:.98rem;color:rgba(255,255,255,.8)}
+.product-list .rhombus{margin-top:7px;width:9px;height:9px;background:var(--gold)}
+.product-side{
+  background:linear-gradient(150deg,rgba(92,75,223,.28),rgba(0,145,150,.28));
+  display:flex;flex-direction:column;justify-content:center;gap:14px;padding:46px 38px;
+  border-left:1px solid var(--line-dark);
+}
+.stat{border-left:2px solid var(--gold);padding-left:16px}
+.stat b{display:block;font-family:var(--display);font-size:1.9rem;font-weight:700;letter-spacing:-.03em}
+.stat span{font-family:var(--mono);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65)}
 
-        .service-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(92, 85, 190, 0.1);
-        }
+/* ---------- processo ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--white)}
+.step{padding:32px 28px;border-right:1px solid var(--line)}
+.step:last-child{border-right:none}
+.step-n{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;color:var(--muted)}
+.step h3{margin:12px 0 10px;font-size:1.16rem}
+.step p{font-size:.97rem;color:var(--text-soft)}
 
-        .service-card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 25px; display: block; }
-        .service-card h3 { font-size: 1.5rem; color: var(--dark); margin-bottom: 15px; font-weight: 700; }
-        .service-card p { color: var(--text-gray); font-size: 0.95rem; }
+/* ---------- CTA final ---------- */
+.close{background:var(--ink);color:#fff;padding:92px 0;text-align:center;position:relative;overflow:hidden}
+.close::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(700px 320px at 50% 100%, rgba(245,167,34,.14), transparent 70%);
+}
+.close .shell{position:relative;z-index:2}
+.close h2{color:#fff;max-width:24ch;margin:16px auto 18px}
+.close p{color:rgba(255,255,255,.68);max-width:52ch;margin:0 auto}
+.close-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:34px}
 
-        /* NOVA SEÇÃO: GUIA CASH */
-        .guiacash-section {
-            background: var(--gradient-dark);
-            color: var(--white);
-            padding: 100px 0;
-            position: relative;
-        }
+/* ---------- footer ---------- */
+footer{background:var(--ink-2);color:rgba(255,255,255,.62);padding:52px 0 34px;font-size:.9rem}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;align-items:start}
+footer h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.42);font-weight:400;margin-bottom:14px}
+footer a{text-decoration:none;transition:color .2s}
+footer a:hover{color:#fff}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-legal{
+  margin-top:40px;padding-top:22px;border-top:1px solid var(--line-dark);
+  font-family:var(--mono);font-size:.72rem;line-height:1.9;color:rgba(255,255,255,.42);
+}
 
-        .guiacash-grid {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
+/* ---------- reveal ---------- */
+.rise{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rise.in{opacity:1;transform:none}
 
-        .guiacash-text { flex: 1; min-width: 300px; }
-        .guiacash-text h2 { font-size: 2.8rem; font-weight: 800; color: var(--white); margin-bottom: 20px; line-height: 1.1; }
-        .guiacash-text h2 span { color: var(--success); }
-        .guiacash-text p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 30px; }
-        
-        .feature-list { list-style: none; margin-bottom: 40px; }
-        .feature-list li { margin-bottom: 15px; font-size: 1.05rem; display: flex; align-items: center; gap: 15px; }
-        .feature-list i { color: var(--success); font-size: 1.2rem; background: rgba(16, 185, 129, 0.1); padding: 8px; border-radius: 50%; }
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rise{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
 
-        .guiacash-visual {
-            flex: 1;
-            min-width: 300px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            padding: 50px 30px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .guiacash-visual i { font-size: 5rem; color: var(--success); margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
-        .guiacash-visual h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .guiacash-visual p { color: #94a3b8; font-size: 0.95rem; }
-
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-        .btn-green {
-            background: var(--success); color: var(--dark); box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-        }
-        .btn-green:hover { background: #059669; color: var(--white); box-shadow: 0 15px 35px rgba(16, 185, 129, 0.5); }
-
-        /* FINAL CTA SECTION */
-        .final-cta { background: var(--bg-light); padding: 100px 0; text-align: center; }
-        .final-cta h2 { font-size: 2.5rem; font-weight: 800; color: var(--dark); margin-bottom: 30px; line-height: 1.2; }
-
-        /* FOOTER */
-        footer { background-color: var(--secondary); color: #94a3b8; padding: 60px 20px; text-align: center; font-size: 0.85rem; }
-        footer img { opacity: 0.5; transition: 0.3s; }
-        footer img:hover { opacity: 1; }
-
-        /* RESPONSIVO */
-        @media (max-width: 768px) {
-            .header-grid { flex-direction: column; gap: 15px; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-            .hero { padding: 180px 0 80px; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.05rem; }
-            .section-title h2, .guiacash-text h2 { font-size: 2.2rem; }
-            .guiacash-grid { gap: 40px; }
-            .guiacash-visual { padding: 30px 20px; }
-            .final-cta h2 { font-size: 2rem; }
-        }
-    </style>
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width:980px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .product{grid-template-columns:1fr}
+  .product-side{border-left:none;border-top:1px solid var(--line-dark);flex-direction:row;flex-wrap:wrap;gap:26px;padding:32px 38px}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:none;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+}
+@media (max-width:768px){
+  .nav-links{display:none}
+  .nav{height:64px}
+  .band{padding:66px 0}
+  .hero{padding-top:64px}
+  .hero-meta{padding-bottom:56px;margin-top:34px}
+  .seam{grid-template-columns:1fr}
+  .seam-half.left{text-align:left;border-right:none;border-bottom:1px solid var(--line-dark)}
+  .seam-half.left p{margin-left:0}
+  .seam-node{display:none}
+  .people{grid-template-columns:1fr}
+  .svc-grid{grid-template-columns:1fr}
+  .creds{grid-template-columns:1fr}
+  .product-copy,.product-side{padding:32px 24px}
+  .foot-grid{grid-template-columns:1fr;gap:28px}
+  .flow-track{flex-direction:column;align-items:stretch}
+  .flow-step{white-space:normal;text-align:center}
+  .flow-link{width:1px;height:22px;min-width:0;margin:0 auto;flex:none}
+  .flow-link::after{animation:travel-v 3.4s linear infinite;left:-2px}
+  @keyframes travel-v{from{top:0;opacity:0}12%{opacity:1}88%{opacity:1}to{top:100%;opacity:0}}
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="container header-grid">
-           <div class="logo">
-                <img src="https://visioncapacita.com.br/visionlogo.png" alt="Logo Vision Educação">
-            </div>
-            <nav class="nav-links">
-                <a href="#inicio">Início</a>
-                <a href="#servicos">O Que Fazemos</a>
-                <a href="#metodo">Método GuiaCash®</a>
-                <a href="https://wa.me/555192491010" target="_blank" class="cta-header">Falar com Consultor</a>
-            </nav>
+<!-- ===================== HEADER ===================== -->
+<header>
+  <div class="shell nav">
+    <a class="brand" href="#topo">
+      <img src="vision-logo.png" alt="Vision">
+      <span class="brand-name">Vision<small>Educação e Capacitação</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#desenvolvimento">Desenvolvimento</a>
+      <a href="#financas">Finanças</a>
+      <a href="#quem-faz">Quem faz</a>
+      <a href="#guiacash">GuiaCash</a>
+      <a href="#processo">Como trabalhamos</a>
+    </nav>
+    <a class="btn btn-solid" style="background:var(--gold);color:var(--ink)" href="https://wa.me/555192491010" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="topo">
+  <div class="shell">
+    <p class="eyebrow">Porto Alegre · RS &nbsp;/&nbsp; atendimento remoto no Brasil e EUA</p>
+    <h1>Software que <em>executa</em>. Números que <b>orientam</b>.</h1>
+    <p class="hero-lede">
+      Duas frentes, uma casa. Jonatan constrói os aplicativos e as automações que tiram a
+      operação do trabalho manual. Gabriela organiza o dinheiro do negócio e da família até a
+      decisão ficar óbvia.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-build" href="#desenvolvimento">
+        Ver serviços de desenvolvimento
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost-light" href="#financas">Ver consultoria financeira</a>
+    </div>
+    <div class="hero-meta">
+      <span><i></i>Next.js · Supabase · n8n · Docker</span>
+      <span><i></i>Diagnóstico financeiro PF, PJ e dívidas</span>
+      <span><i></i>Projetos sob medida, do escopo ao deploy</span>
+    </div>
+  </div>
+
+  <!-- assinatura: as duas frentes se encontram no losango da marca -->
+  <div class="seam-wrap">
+    <div class="seam">
+      <span class="seam-node"></span>
+      <a class="seam-half left" href="#desenvolvimento">
+        <p class="eyebrow">Frente 01</p>
+        <h3>Desenvolvimento &amp; Automação</h3>
+        <p>Aplicativos web, integrações e rotinas que rodam sozinhas. Com Jonatan Pelisoli.</p>
+        <span class="seam-arrow">tirar o manual da rotina →</span>
+      </a>
+      <a class="seam-half right" href="#financas">
+        <p class="eyebrow">Frente 02</p>
+        <h3>Consultoria Financeira</h3>
+        <p>Fluxo de caixa, precificação, dívidas e patrimônio. Com Gabriela Vieira.</p>
+        <span class="seam-arrow">enxergar o próprio dinheiro →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DESENVOLVIMENTO ===================== -->
+<section class="band band-paper" id="desenvolvimento">
+  <div class="shell">
+    <div class="band-head rise">
+      <p class="eyebrow">Frente 01 · Desenvolvimento &amp; Automação</p>
+      <h2>Se alguém da equipe faz isso à mão toda semana, dá para automatizar.</h2>
+      <p class="lede">
+        Construímos o sistema em vez de vender licença de sistema. Você recebe o código,
+        o banco e o servidor no seu nome — e a documentação para não depender de ninguém.
+      </p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc svc-build rise">
+        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Aplicativos sob medida</h3></div>
+        <p>Web e mobile para o processo que a sua operação já tem, com login, permissões por perfil e painéis de acompanhamento.</p>
+        <ul><li>Next.js</li><li>React</li><li>Supabase</li><li>PostgreSQL</li><li>RLS</li></ul>
+      </article>
+
+      <article class="svc svc-build rise">
+        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Automações em n8n</h3></div>
+        <p>Fluxos que puxam dados, tratam, avisam e registram. Relatório que chega pronto no WhatsApp ou no e-mail, sem alguém montando planilha.</p>
+        <ul><li>n8n</li><li>webhooks</li><li>APIs REST</li><li>WhatsApp</li><li>Google Workspace</li></ul>
+      </article>
+
+      <article class="svc svc-build rise">
+        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Integrações entre sistemas</h3></div>
+        <p>ERP, CRM, contabilidade, e-commerce e banco conversando entre si. Um dado é digitado uma vez e aparece em todos os lugares certos.</p>
+        <ul><li>SharePoint</li><li>Microsoft 365</li><li>OFX</li><li>ETL</li></ul>
+      </article>
+
+      <article class="svc svc-build rise">
+        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Infraestrutura e deploy</h3></div>
+        <p>Servidor, containers, domínio, backup e monitoramento configurados com segurança e atualização contínua.</p>
+        <ul><li>Docker</li><li>VPS Linux</li><li>EasyPanel</li><li>CI/CD</li><li>firewall</li></ul>
+      </article>
+
+      <article class="svc svc-build rise">
+        <div class="svc-head"><span class="rhombus rh-build"></span><h3>Dados e indicadores</h3></div>
+        <p>Modelagem dos dados e painéis que respondem às perguntas da diretoria — margem, custo por obra, produtividade — atualizados sozinhos.</p>
+        <ul><li>Power BI</li><li>modelagem semântica</li><li>orquestração</li></ul>
+      </article>
+
+      <article class="svc svc-build rise">
+        <div class="svc-head"><span class="rhombus rh-build"></span><h3>IA aplicada ao processo</h3></div>
+        <p>Leitura de documento, classificação de lançamento, resposta a cliente e camada de dados pronta para agentes — com o resultado sempre auditável.</p>
+        <ul><li>MCP</li><li>agentes</li><li>OCR</li><li>classificação</li></ul>
+      </article>
+    </div>
+
+    <div class="flow rise">
+      <p class="flow-title">Exemplo real de fluxo entregue</p>
+      <div class="flow-track">
+        <span class="flow-step">extrato do banco</span>
+        <span class="flow-link"></span>
+        <span class="flow-step">n8n classifica</span>
+        <span class="flow-link"></span>
+        <span class="flow-step">grava no banco de dados</span>
+        <span class="flow-link"></span>
+        <span class="flow-step">painel atualiza</span>
+        <span class="flow-link"></span>
+        <span class="flow-step">resumo no WhatsApp</span>
+      </div>
+      <p class="flow-note">
+        O que antes era uma tarde inteira de digitação virou uma rotina que roda toda segunda às 7h.
+        O mesmo desenho serve para nota fiscal, lead, ordem de serviço ou apontamento de obra.
+      </p>
+    </div>
+
+    <div style="margin-top:36px">
+      <a class="btn btn-build" href="https://wa.me/555192491010?text=Quero%20falar%20sobre%20um%20projeto%20de%20desenvolvimento" target="_blank" rel="noopener">
+        Descrever meu projeto
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINANÇAS ===================== -->
+<section class="band band-white" id="financas">
+  <div class="shell">
+    <div class="band-head rise">
+      <p class="eyebrow">Frente 02 · Consultoria Financeira</p>
+      <h2>Empresário não sofre por falta de esforço. Sofre por falta de número confiável.</h2>
+      <p class="lede">
+        Gabriela trabalha as três áreas que sempre se misturam — o negócio, a família e as dívidas —
+        até você saber quanto sobra, quanto custa cada decisão e qual é o próximo passo.
+      </p>
+    </div>
+
+    <div class="svc-grid">
+      <article class="svc svc-money rise">
+        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Diagnóstico financeiro</h3></div>
+        <p>Levantamento das três áreas, separação de PF e PJ e um retrato honesto da situação atual, com prioridades definidas.</p>
+      </article>
+
+      <article class="svc svc-money rise">
+        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Negócio: caixa e preço</h3></div>
+        <p>Fluxo de caixa, resultado por período, custo real e precificação. Para saber se o mês fechou no lucro antes do contador dizer.</p>
+      </article>
+
+      <article class="svc svc-money rise">
+        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Resolução de dívidas</h3></div>
+        <p>Mapa de todas as dívidas, conferência de juros e cláusulas, identificação de superendividamento e estratégia de negociação com o banco.</p>
+      </article>
+
+      <article class="svc svc-money rise">
+        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Família e patrimônio</h3></div>
+        <p>Orçamento que a casa consegue seguir, reserva de emergência, uso consciente do cartão e construção de patrimônio no ritmo possível.</p>
+      </article>
+
+      <article class="svc svc-money rise">
+        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Mentoria acompanhada</h3></div>
+        <p>Encontros periódicos para manter o plano de pé, revisar metas e tratar as decisões que aparecem no caminho.</p>
+      </article>
+
+      <article class="svc svc-money rise">
+        <div class="svc-head"><span class="rhombus rh-money"></span><h3>Treinamento de equipe e família</h3></div>
+        <p>Todo mundo que mexe no dinheiro entendendo o mesmo painel e a mesma regra. É o que faz o controle durar depois da consultoria.</p>
+      </article>
+    </div>
+
+    <div class="creds">
+      <div class="cred rise">
+        <span class="rhombus rh-money"></span>
+        <p><strong>Economista e especialista em educação financeira</strong>Criadora do método Círculo Mestre e do método Com Dinheiro e Sem Dívida.</p>
+      </div>
+      <div class="cred rise">
+        <span class="rhombus rh-money"></span>
+        <p><strong>Prêmio Ideation Brasil e Everis Brasil</strong>Reconhecimento por projeto inovador em educação financeira.</p>
+      </div>
+      <div class="cred rise">
+        <span class="rhombus rh-money"></span>
+        <p><strong>Destaque no International Business Model Competition</strong>Competição internacional realizada nos Estados Unidos.</p>
+      </div>
+      <div class="cred rise">
+        <span class="rhombus rh-money"></span>
+        <p><strong>Especialista em economia comportamental</strong>Quitou R$ 1 milhão em dívidas na empresa da própria família antes de ensinar o método.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:36px">
+      <a class="btn btn-money" href="https://wa.me/555192491010?text=Quero%20falar%20sobre%20consultoria%20financeira" target="_blank" rel="noopener">
+        Agendar conversa inicial
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== QUEM FAZ ===================== -->
+<section class="band band-paper" id="quem-faz">
+  <div class="shell">
+    <div class="band-head rise">
+      <p class="eyebrow">Quem faz</p>
+      <h2>Você fala direto com quem executa.</h2>
+      <p class="lede">Sem camada de atendimento no meio. Quem escuta o problema é quem entrega a solução.</p>
+    </div>
+
+    <div class="people">
+      <article class="person build rise">
+        <div class="person-top">
+          <div class="portrait">
+            <img src="jonatan.jpg" alt="Jonatan Pelisoli">
+            <span class="mark"></span>
+          </div>
+          <div>
+            <p class="person-name">Jonatan Pelisoli</p>
+            <p class="person-role">Desenvolvedor · Automação e Dados</p>
+          </div>
         </div>
-    </header>
-
-    <section id="inicio" class="hero">
-        <div class="container">
-            <h1>Sua <span class="highlight">Visão</span> Financeira com Clareza de <span class="highlight">Farol</span>.</h1>
-            <p>A Vision Educação ajuda consultorias, pequenos negócios e pessoas físicas a transformarem o caos financeiro em controle total e lucro real.</p>
-            <a href="#metodo" class="cta-btn">Conhecer a Automação</a>
+        <p class="person-bio">
+          Desenvolvedor e especialista em IA aplicada. Construiu de ponta a ponta as plataformas da
+          casa — banco de dados, regras de acesso, importação de extratos e assistente de IA — e mantém
+          a infraestrutura que sustenta tudo. Atua também em projetos de dados e automação para
+          consultorias e empresas de construção nos Estados Unidos.
+        </p>
+        <div class="tags">
+          <span class="tag">Next.js</span><span class="tag">Supabase</span><span class="tag">n8n</span>
+          <span class="tag">Docker</span><span class="tag">Power BI</span><span class="tag">MCP</span>
         </div>
-    </section>
-
-    <section id="servicos" class="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Onde Podemos Te Guiar?</h2>
-                <p>Educação e consultoria financeira desenhada para o seu momento atual.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-chart-pie"></i>
-                    <h3>Consultoria PF</h3>
-                    <p>Organize suas contas, elimine dívidas e aprenda a investir com segurança e planejamento estratégico.</p>
-                </div>
-                <div class="service-card" style="border-color: var(--primary); box-shadow: 0 15px 30px rgba(92,85,190,0.08);">
-                    <i class="fas fa-robot"></i>
-                    <h3>Mentoria Gabi AI</h3>
-                    <p>Eleve seu controle a outro nível. Mentoria especializada combinada com a automação inteligente da nossa IA.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-briefcase"></i>
-                    <h3>Visão para Empresas</h3>
-                    <p>Controle de fluxo de caixa, precificação e visão de lucro real para MEIs e pequenos negócios prosperarem.</p>
-                </div>
-            </div>
+        <div class="person-foot">
+          <a class="btn btn-ghost" href="#desenvolvimento">Ver o que ele entrega</a>
         </div>
-    </section>
+      </article>
 
-    <section id="metodo" class="guiacash-section">
-        <div class="container guiacash-grid">
-            <div class="guiacash-text">
-                <h2>Sistema <span>GuiaCash®</span></h2>
-                <p>O primeiro ecossistema financeiro que une a familiaridade de uma planilha do Google Drive com o poder da automação via WhatsApp.</p>
-                
-                <ul class="feature-list">
-                    <li><i class="fas fa-check"></i> Planilha inteligente criada automaticamente no seu Drive.</li>
-                    <li><i class="fas fa-check"></i> Envio de gastos e entradas direto pelo WhatsApp.</li>
-                    <li><i class="fas fa-check"></i> Gráficos e painéis atualizados em tempo real.</li>
-                    <li><i class="fas fa-check"></i> Adeus ao trabalho manual de digitar recibos à noite.</li>
-                </ul>
-
-                <a href="/guiacash" class="cta-btn btn-green">Ver o GuiaCash® na Prática</a>
-            </div>
-            
-            <div class="guiacash-visual">
-                <i class="fas fa-bolt"></i>
-                <h3>Automação de Ponta a Ponta</h3>
-                <p>O robô captura a informação no seu celular, organiza e injeta na sua planilha financeira em segundos. Controle na palma da mão.</p>
-            </div>
+      <article class="person money rise">
+        <div class="person-top">
+          <div class="portrait">
+            <img src="gabriela.jpg" alt="Gabriela Vieira">
+            <span class="mark"></span>
+          </div>
+          <div>
+            <p class="person-name">Gabriela Vieira</p>
+            <p class="person-role">Economista · Consultoria Financeira</p>
+          </div>
         </div>
-    </section>
-
-    <section id="contato" class="final-cta">
-        <div class="container">
-            <h2>Pronto para assumir o controle <br> da sua vida financeira?</h2>
-            <a href="https://wa.me/555192491010" class="cta-btn" target="_blank">Falar com um Guia no WhatsApp</a>
+        <p class="person-bio">
+          Começou a empreender aos 20 e descobriu a empresa da família com R$ 1 milhão em dívidas.
+          Em vez de sair, ficou: especializou-se em resolução de dívidas e economia comportamental,
+          quitou tudo, gerou capital de investimento e treinou cada pessoa da casa. Hoje leva o mesmo
+          método a centenas de famílias e negócios.
+        </p>
+        <div class="tags">
+          <span class="tag">Fluxo de caixa</span><span class="tag">Precificação</span>
+          <span class="tag">Dívidas</span><span class="tag">Normativas BACEN</span>
+          <span class="tag">Comportamento</span>
         </div>
-    </section>
-
-    <footer style="background-color: var(--secondary); padding: 20px 20px;">
-        <div class="container" style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
-            <img src="https://visioncapacita.com.br/visionlogo.png" 
-                 alt="Logo Vision Educação" 
-                 style="height: 60px; filter: brightness(0) invert(1); opacity: 0.9;">
-            
-            <p style="color: #94a3b8; font-size: 0.85rem; text-align: center; line-height: 1.4;">
-                © 2026 Vision Educação | Consultoria e Educação Financeira.<br>
-                Transformando caos em clareza com inteligência e estratégia.
-            </p>
+        <div class="person-foot">
+          <a class="btn btn-ghost" href="#financas">Ver o que ela entrega</a>
         </div>
-    </footer>
+      </article>
+    </div>
+  </div>
+</section>
 
+<!-- ===================== GUIACASH ===================== -->
+<section class="band band-white" id="guiacash">
+  <div class="shell">
+    <div class="product rise">
+      <div class="product-copy">
+        <p class="eyebrow" style="color:rgba(255,255,255,.55)">Produto próprio</p>
+        <h2>GuiaCash: o encontro das duas frentes</h2>
+        <p>
+          O método da Gabriela dentro do sistema que o Jonatan construiu. Negócio, família e dívidas
+          em uma visão só, alimentada por importação de extrato e por um assistente de IA que aceita
+          foto, áudio ou texto.
+        </p>
+        <ul class="product-list">
+          <li><span class="rhombus"></span>Resultado da PF e DRE da PJ no mesmo lugar</li>
+          <li><span class="rhombus"></span>Mapa de dívidas com simulador de juros e cláusulas</li>
+          <li><span class="rhombus"></span>Exame financeiro com diagnóstico automático</li>
+          <li><span class="rhombus"></span>Acesso colaborativo com permissão por pessoa</li>
+        </ul>
+        <a class="btn btn-solid" style="background:#fff;color:var(--ink)" href="https://guiacash-app.visioncapacita.com.br" target="_blank" rel="noopener">
+          Conhecer o GuiaCash
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <div class="product-side">
+        <div class="stat"><b>3 áreas</b><span>PF, PJ e dívidas</span></div>
+        <div class="stat"><b>15 min</b><span>por semana de manutenção</span></div>
+        <div class="stat"><b>12</b><span>painéis de controle</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROCESSO ===================== -->
+<section class="band band-paper" id="processo">
+  <div class="shell">
+    <div class="band-head rise">
+      <p class="eyebrow">Como trabalhamos</p>
+      <h2>Três etapas, na ordem.</h2>
+      <p class="lede">Vale para projeto de software e para consultoria financeira — o que muda é o que se mede no fim.</p>
+    </div>
+    <div class="steps rise">
+      <div class="step">
+        <p class="step-n">Etapa 1</p>
+        <h3>Diagnóstico</h3>
+        <p>Uma conversa para entender o processo ou os números como eles são hoje. Saímos dela com o problema nomeado e o escopo delimitado.</p>
+      </div>
+      <div class="step">
+        <p class="step-n">Etapa 2</p>
+        <h3>Desenho e proposta</h3>
+        <p>Você recebe o desenho da solução, o prazo e o valor por escrito, com as entregas separadas por etapa. Nada começa sem esse aceite.</p>
+      </div>
+      <div class="step">
+        <p class="step-n">Etapa 3</p>
+        <h3>Entrega e acompanhamento</h3>
+        <p>Implantação com treinamento de quem vai usar e um período de ajuste. O sistema fica no seu nome; o método fica com a sua equipe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA FINAL ===================== -->
+<section class="close">
+  <div class="shell">
+    <p class="eyebrow">Primeira conversa sem custo</p>
+    <h2>Conte o problema. A gente diz qual das duas frentes resolve.</h2>
+    <p>Se for processo manual, código e automação. Se for dinheiro, consultoria. Se for os dois, você já está no lugar certo.</p>
+    <div class="close-actions">
+      <a class="btn btn-solid" style="background:var(--gold);color:var(--ink)" href="https://wa.me/555192491010" target="_blank" rel="noopener">
+        Falar no WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-ghost-light" href="mailto:contato@visioncapacita.com.br">Enviar e-mail</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#topo" style="margin-bottom:14px">
+          <img src="vision-logo.png" alt="Vision">
+          <span class="brand-name">Vision<small>Educação e Capacitação</small></span>
+        </a>
+        <p style="max-width:34ch;margin-top:14px">
+          Desenvolvimento de software, automação e consultoria financeira.
+          Porto Alegre, RS — com atendimento remoto.
+        </p>
+      </div>
+      <div>
+        <h4>Serviços</h4>
+        <ul class="foot-links">
+          <li><a href="#desenvolvimento">Desenvolvimento e automação</a></li>
+          <li><a href="#financas">Consultoria financeira</a></li>
+          <li><a href="#guiacash">GuiaCash</a></li>
+          <li><a href="#processo">Como trabalhamos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul class="foot-links">
+          <li><a href="https://wa.me/555192491010" target="_blank" rel="noopener">WhatsApp (51) 9249-1010</a></li>
+          <li><a href="mailto:contato@visioncapacita.com.br">contato@visioncapacita.com.br</a></li>
+          <li><a href="https://guiacash-app.visioncapacita.com.br/privacidade/" target="_blank" rel="noopener">Política de privacidade</a></li>
+          <li><a href="https://guiacash-app.visioncapacita.com.br/termos/" target="_blank" rel="noopener">Termos de uso</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-legal">
+      Vision Educação e Capacitação · CNPJ 68.187.883/0001-24<br>
+      Rua Antônio Joaquim Mesquita, 481 — Passo da Areia, Porto Alegre/RS · CEP 91350-180<br>
+      © 2026 Vision Educação e Capacitação. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+/* reveal ao rolar */
+(function(){
+  var els = document.querySelectorAll('.rise');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('in')});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el,i){ el.style.transitionDelay = (Math.min(i,4)*60) + 'ms'; io.observe(el); });
+})();
+</script>
 </body>
 </html>
